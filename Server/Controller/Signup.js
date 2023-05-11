@@ -1,9 +1,6 @@
-//signup api 
-
-//import schema
+//signup api  import schema
 import user from "../Model/user.js";
 import bcrypt from 'bcrypt';
-
 const Signup = async (req, res) => {
 
     try {
@@ -13,7 +10,7 @@ const Signup = async (req, res) => {
         // this will receive complete signup object from react fie
         const User = {name:req.body.name, username:req.body.username, pass:hashpass};
         const newUser=new user(User);//returns validated object
-        console.log("here in Signup.js")
+        console.log("here in Signuphjjhbhjbhj.js")
         console.log(req);
         console.log(newUser.name);
         console.log(newUser.pass);

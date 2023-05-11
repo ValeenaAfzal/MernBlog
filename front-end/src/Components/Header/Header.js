@@ -23,6 +23,7 @@ const Header = () => {
             <Container>
                 <Link to='/'>HOME</Link>
                 <Link to='/login'>LOGOUT</Link>
+                <Link to='/profile'>Profile</Link>
             </Container>
         </Component>
     )

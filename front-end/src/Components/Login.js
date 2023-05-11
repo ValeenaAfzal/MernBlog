@@ -1,41 +1,37 @@
 import React from 'react';
 import { Box, TextField, Button, styled, Typography } from '@mui/material';
-import { useState , useContext} from 'react';
+import { useState, useContext } from 'react';
 import { API } from '../services/api';
 import { dataContext } from '../context/provider';
-
 import { useNavigate } from 'react-router-dom';
-
-
-
+import starlight from '../starlight.png';
 
 const Component = styled(Box)`
     width: 400px;
+    margin-top: 25px;
     margin: auto;
     box-shadow: 5px 2px 5px 2px rgb(0 0 0/ 0.6);
 `;
 
 const Image = styled('img')({
-    width: 100,
     display: 'flex',
     margin: 'auto',
-    padding: '50px 0 0'
 });
 
 const Wrapper = styled(Box)`
-    padding: 25px 35px;
+    padding: 20px 35px;
     display: flex;
     flex: 1;
     overflow: auto;
     flex-direction: column;
     & > div, & > button, & > p {
-        margin-top: 20px;
+        margin-top: 5px;
     }
 `;
 
 const LoginButton = styled(Button)`
     text-transform: none;
-    background: #FB641B;
+    background: #7e277c;
     color: #fff;
     height: 48px;
     border-radius: 2px;
@@ -44,7 +40,7 @@ const LoginButton = styled(Button)`
 const SignupButton = styled(Button)`
     text-transform: none;
     background: #fff;
-    color: #2874f0;
+    color: #c0203f;
     height: 48px;
     border-radius: 2px;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
@@ -58,13 +54,13 @@ const Text = styled(Typography)`
 //default values(objects) stored in Signup and Login State
 const loginValues = {
     username: '',
-    pass: ''
+    pass: '',
 };
 
 const signupValues = {
     name: '',
     username: '',
-    pass: ''
+    pass: '',
 };
 
 const Error = styled(Typography)`
@@ -75,19 +71,18 @@ const Error = styled(Typography)`
     font-weight: 600;
 `
 
-const Login = ({isUserAuthenticated}) => {
+const Login = ({ isUserAuthenticated }) => {
 
 
     const [account, setaccount] = useState('login');
     const [login, setLogin] = useState(loginValues);
     const [signup, setSignup] = useState(signupValues);
     const [error, showError] = useState('');
-    const {setaccounts}=useContext(dataContext); 
+    const { setaccounts } = useContext(dataContext);
 
     const navigate = useNavigate();
 
-    const LOGIN= async() =>
-    {
+    const LOGIN = async () => {
         let getresponse = await API.userLogin(login);//send state
         if (getresponse.isSuccess) //api.js
         {
@@ -97,7 +92,7 @@ const Login = ({isUserAuthenticated}) => {
             sessionStorage.setItem('rToken', `Bearer ${getresponse.data.Token}`);
             //store globallt using context api or localstorage //context/provider
             setaccounts({ name: getresponse.data.name, username: getresponse.data.username });
-            
+
             isUserAuthenticated(true);
             setLogin(loginValues);
             navigate('/');
@@ -133,49 +128,46 @@ const Login = ({isUserAuthenticated}) => {
     const onSignupChange = (e) => {
         setSignup({ ...signup, [e.target.name]: e.target.value });
     }
-
-
-    const imageURL = 'https://www.sesta.it/wp-content/uploads/2021/03/logo-blog-sesta-trasparente.png';
     return (
-        <Component>
-            <Box>
-                <Image src={imageURL} alt="login" />
-                {
-                    /*check the state and then display div */
-                    account === 'login' ?
-                        <Wrapper>
+        <Box style={{marginTop:'20px'}}>
+            <Component>
+                <Box>
+                    <Image src={starlight} alt="login" style={{ width: '70%', height: '80%' }} />
+                    {
+                        /*check the state and then display div */
+                        account === 'login' ?
+                            <Wrapper>
 
-                            {/*controlled component value={login.username} */}
-                            <TextField variant='standard' value={login.username} label='Enter User Name' onChange={(e) => onLoginChange(e)} name='username' />
-                            <TextField variant='standard' value={login.pass} label='Enter Password' onChange={(e) => onLoginChange(e)} name='pass' />
+                                {/*controlled component value={login.username} */}
+                                <TextField variant='standard' value={login.username} label='Enter User Name' onChange={(e) => onLoginChange(e)} name='username' />
+                                <TextField variant='standard' value={login.pass} label='Enter Password' onChange={(e) => onLoginChange(e)} name='pass' />
 
-                            {error && <Error>{error}</Error>}
+                                {error && <Error>{error}</Error>}
 
-                            <LoginButton variant='contained' onClick={() => LOGIN()}>Login</LoginButton>
-                            <Text>OR</Text>
-                            <SignupButton onClick={() => changeForm()}>Create an Account</SignupButton>
-                        </Wrapper> :
+                                <LoginButton variant='contained' onClick={() => LOGIN()}>Login</LoginButton>
+                                <Text>OR</Text>
+                                <SignupButton onClick={() => changeForm()}>Create an Account</SignupButton>
+                            </Wrapper> :
 
-                        <Wrapper>
+                            <Wrapper>
 
-                            <TextField variant='standard' label='Name' onChange={(e) => onSignupChange(e)} name='name' />
-                            <TextField variant='standard' label='User Name' onChange={(e) => onSignupChange(e)} name='username' />
-                            <TextField variant='standard' label='Password' onChange={(e) => onSignupChange(e)} name='pass' />
+                                <TextField variant='standard' label='Name' onChange={(e) => onSignupChange(e)} name='name' />
+                                <TextField variant='standard' label='User Name' onChange={(e) => onSignupChange(e)} name='username' />
+                                <TextField variant='standard' label='Password' onChange={(e) => onSignupChange(e)} name='pass' />
 
-                            {error && <Error>{error}</Error>}
+                                {error && <Error>{error}</Error>}
 
-                            <SignupButton onClick={() => SignUP()}>Sign Up</SignupButton>
-                            <Text>OR</Text>
-                            <LoginButton variant='contained' onClick={() => changeForm()}>Already have an Account?</LoginButton>
+                                <SignupButton onClick={() => SignUP()}>Sign Up</SignupButton>
+                                <Text>OR</Text>
+                                <LoginButton variant='contained' onClick={() => changeForm()}>Already have an Account?</LoginButton>
 
-                        </Wrapper>
-                }
+                            </Wrapper>
+                    }
 
-            </Box>
+                </Box>
 
-        </Component>
-
-
+            </Component>
+        </Box>
 
 
     )

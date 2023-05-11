@@ -28,14 +28,15 @@ export const API_Notification_messages= {
 export const ServiceURL = {
     userLogin: { url: '/login', method: 'POST' },
     userSignup: { url: '/signup', method: 'POST' },
-   /* getAllPosts: { url: '/posts', method: 'GET', params: true },
-    getRefreshToken: { url: '/token', method: 'POST' },
-    uploadFile: { url: 'file/upload', method: 'POST' },
+    uploadFile: { url: '/file/upload', method: 'POST' },
     createPost: { url: 'create', method: 'POST' },
+    getAllPosts: { url: '/posts', method: 'GET', params: true },
+    getRefreshToken: { url: '/token', method: 'POST' },
+
     deletePost: { url: 'delete', method: 'DELETE', query: true },
     getPostById: { url: 'post', method: 'GET', query: true },
     newComment: { url: '/comment/new', method: 'POST' },
     getAllComments: { url: 'comments', method: 'GET', query: true },
     deleteComment: { url: 'comment/delete', method: 'DELETE', query: true },
-    updatePost: { url: 'update', method: 'PUT', query: true }*/
+    updatePost: { url: 'update', method: 'PUT', query: true }
 }

@@ -13,7 +13,10 @@ dotenv.config();//init
 const Logins = async (req, res) => {
 
     let User = await user.findOne({username: req.body.username});
-    
+    console.log("here in Login.js")
+        console.log(req);
+        console.log(User.pass);
+        console.log(User.username);
     //if user not found
     if(!User)
     {

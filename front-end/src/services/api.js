@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { ServiceURL, API_Notification_messages } from '../Constants/config';
+import { getAccessToken, getRefreshToken, setAccessToken, getType } from  '../Assets/constants'
+
 
 //backend URL used while making express server
 const URL = 'http://localhost:8080';
@@ -18,15 +20,18 @@ const createApis = axios.create(
 )
 
 createApis.interceptors.request.use( //take two call back fnction for suceess and fail 
-
-    function (config) {
-        return (config);
+    function(config) {
+        if (config.TYPE.params) {
+            config.params = config.TYPE.params
+        } else if (config.TYPE.query) {
+            config.url = config.url + '/' + config.TYPE.query;
+        }
+        return config;
     },
-    function (error) {
+    function(error) {
         return Promise.reject(error);
     }
-
-)
+);
 
 createApis.interceptors.response.use(
     function (response) {
@@ -119,10 +124,10 @@ for (const [key, value] of Object.entries(ServiceURL)) {
             url: value.url,
             data: value.method === 'DELETE' ? '' : body,
             responseType: value.responseType,
-           // headers: {
-               // authorization: getAccessToken(),
-          //  },
-           // TYPE: getType(value, body),
+            headers: {
+                authorization: getAccessToken(),
+            },
+            TYPE: getType(value, body),
             onUploadProgress: function (progressEvent) {
                 if (showUploadProgress) {
                     let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
