@@ -102,5 +102,5 @@ const DetailView = () => {
         </Container>
     )
 }
-
+//POST PROP TO SEE KIS POST KI COMMENTS
 export default DetailView;

@@ -122,7 +122,7 @@ for (const [key, value] of Object.entries(ServiceURL)) {
     createApis({
             method: value.method, //value==object
             url: value.url,
-            data: value.method === 'DELETE' ? '' : body,
+            data: value.method === 'DELETE' ? {} : body,//donot send body 
             responseType: value.responseType,
             headers: {
                 authorization: getAccessToken(),

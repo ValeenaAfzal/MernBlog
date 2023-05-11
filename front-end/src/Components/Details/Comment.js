@@ -38,7 +38,7 @@ const Comment = ({ comment, setToggle }) => {
     
     const removeComment = async () => {
        await API.deleteComment(comment._id);
-       setToggle(prev => !prev);
+       setToggle(prevState => !prevState);// to chnage state so that add new comment displays new comments
     }
 
     return (

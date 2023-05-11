@@ -40,6 +40,7 @@ const Comments = ({ post }) => {
 
     const { account } = useContext(dataContext);
 
+    //as soon as details load load comments
     useEffect(() => {
         const getData = async () => {
             const response = await API.getAllComments(post._id);
@@ -62,7 +63,7 @@ const Comments = ({ post }) => {
     const addComment = async() => {
         await API.newComment(comment);
         setComment(initialValue)
-        setToggle(prev => !prev);
+        setToggle(prevState => !prevState);
     }
     
     return (
@@ -70,7 +71,7 @@ const Comments = ({ post }) => {
             <Container>
                 <Image src={url} alt="dp" />   
                 <StyledTextArea 
-                    rowsMin={5} 
+                    rowsmin={5} 
                     placeholder="what's on your mind?"
                     onChange={(e) => handleChange(e)} 
                     value={comment.comments}
