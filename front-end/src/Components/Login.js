@@ -91,7 +91,7 @@ const Login = ({ isUserAuthenticated }) => {
             sessionStorage.setItem('aToken', `Bearer ${getresponse.data.aToken}`);
             sessionStorage.setItem('rToken', `Bearer ${getresponse.data.Token}`);
             //store globallt using context api or localstorage //context/provider
-            setaccounts({ name: getresponse.data.name, username: getresponse.data.username });
+            setaccounts({ name: getresponse.data.name, username: getresponse.data.username , pass: getresponse.data.pass});
 
             isUserAuthenticated(true);
             setLogin(loginValues);

@@ -16,6 +16,7 @@ export const newComment = async (request, response) => {
 export const getComments = async (request, response) => {
     try {
         const comments = await Comment.find({ postId: request.params.id });
+        console.log("")
         await response.status(200).json(comments);//send back to frontend
     } catch (error) {
         response.status(500).json(error)

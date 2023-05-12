@@ -10,6 +10,7 @@ import { useState } from 'react';
 import CreatePost from './Components/PostOperations/CreatePost';
 import DetailView from './Components/Details/Details';
 import Update from './Components/PostOperations/Update';
+import Profile  from './Components/Profile';
 // can pass data using props or chuldren
 
 const PrivateRoute = ({ isUserAuthenticated, ...props }) => { // when you refresh the page isUserAutheticated is set to false and User signs out automaticaally
@@ -48,6 +49,10 @@ function App() {
 
               <Route path='/update/:id' element={<PrivateRoute isUserAuthenticated={isUserAuthenticated} />} >
                 <Route path='/update/:id' element={<Update />} />
+              </Route>
+
+              <Route path='/profile' element={<PrivateRoute isUserAuthenticated={isUserAuthenticated} />}>
+                <Route path='/profile' element={<Profile />} />
               </Route>
 
             </Routes>

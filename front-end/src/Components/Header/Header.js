@@ -21,9 +21,9 @@ const Header = () => {
     return (
         <Component>
             <Container>
-                <Link to='/'>HOME</Link>
-                <Link to='/login'>LOGOUT</Link>
+                <Link to='/'>Home</Link>
                 <Link to='/profile'>Profile</Link>
+                <Link to='/login'>Sign Out</Link>
             </Container>
         </Component>
     )

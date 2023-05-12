@@ -5,7 +5,7 @@ export const dataContext = createContext(null);
 
 const Provider=({children})=>
 {
-    const[account,setaccounts]=useState({username:'', name:''});
+    const[account,setaccounts]=useState({username:'', name:'',pass:''});
 
     return(
         <dataContext.Provider value={{

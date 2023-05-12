@@ -1,6 +1,7 @@
 //create apis
 import express from "express";
 import Signup from "../Controller/Signup.js";
+import { updateProfile } from "../Controller/Signup.js";
 import Logins from "../Controller/LOGIN.js";
 
 import UploadFile from '../UploadFile.js'
@@ -8,6 +9,7 @@ import { FetchImage, UploadImage} from "../Controller/UploadImage.js";
 import { authenticateToken, createNewToken } from '../Controller/JWT.js';
 import { createPost,getAllPosts, getPost,updatePost,deletePost } from "../Controller/PostController.js";
 import { newComment,deleteComment,getComments } from "../Controller/CommentC.js";
+import { getProfile } from "../Controller/Profile.js";
 
 const router = express.Router();
 router.post('/signup',Signup); //api endpoint - if want to call specific api use call back , now in controller
@@ -26,6 +28,10 @@ router.delete('/comment/delete/:id', deleteComment);
 
 router.put('/update/:id', updatePost);
 router.delete('/delete/:id', deletePost);
+
+router.get('/profile',getProfile);
+
+router.post('/save/profile',updateProfile);
 
 //authenticateToken, authenticateToken,  authenticateToken , authenticateToken , authenticateToken , authenticateToken , authenticateToken , authenticateToken
 /*
