@@ -30,7 +30,7 @@ export const updatePost = async (request, response) => {
 export const deletePost = async (request, response) => {
     try {
         const post = await Post.findById(request.params.id);
-        
+        console.log(request.body); // log the request body
         await post.delete()
 
         response.status(200).json('post deleted successfully');
@@ -38,7 +38,6 @@ export const deletePost = async (request, response) => {
         response.status(500).json(error)
     }
 }
-
 //get post when user cick on posts
 export const getPost = async (request, response) => {
     try {
@@ -59,8 +58,7 @@ export const getAllPosts = async (request, response) => {
         else if (category) 
             posts = await Post.find({ categories: category });
         else 
-            posts = await Post.find({});
-            
+            posts = await Post.find({});     
         response.status(200).json(posts);
     } catch (error) {
         response.status(500).json(error)

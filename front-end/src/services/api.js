@@ -88,7 +88,7 @@ const ProcessError = (error) => {// process three types of error request,respons
             //     return Promise.reject(error)
             // }
         } else {
-            console.log("ERROR IN RESPONSE: ", error.toJSON());
+            console.log("ERROR IN RESPONSE: ", JSON.stringify(error));
             return {
                 isError: true,
                 msg: API_Notification_messages.responseFailure,
@@ -97,7 +97,7 @@ const ProcessError = (error) => {// process three types of error request,respons
         }
     } else if (error.request) {
         // The request was made but no response was received
-        console.log("ERROR IN RESPONSE: ", error.toJSON());
+        console.log("ERROR IN RESPONSE: ", JSON.stringify(error));
         return {
             isError: true,
             msg: API_Notification_messages.requestFailure,
@@ -106,7 +106,7 @@ const ProcessError = (error) => {// process three types of error request,respons
     } else {
         //some problem caused by front end
         // Something happened in setting up the request that triggered an Error
-        console.log("ERROR IN RESPONSE: ", error.toJSON());
+        console.log("ERROR IN RESPONSE: ", JSON.stringify(error));
         return {
             isError: true,
             msg: API_Notification_messages.networkError,
@@ -122,11 +122,9 @@ for (const [key, value] of Object.entries(ServiceURL)) {
     createApis({
             method: value.method, //value==object
             url: value.url,
-            data: value.method === 'DELETE' ? {} : body,//donot send body 
+            data: value.method === 'DELETE' ? '' : body,//donot send body 
             responseType: value.responseType,
-            headers: {
-                authorization: getAccessToken(),
-            },
+            headers: body instanceof FormData ? { authorization: getAccessToken(), 'Content-Type': 'multipart/form-data' } : {  authorization: getAccessToken() },
             TYPE: getType(value, body),
             onUploadProgress: function (progressEvent) {
                 if (showUploadProgress) {

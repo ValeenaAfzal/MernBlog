@@ -35,10 +35,10 @@ export const ServiceURL = {
     saveprofile:{url:'save/profile', method:'POST'},
     profile:{url:'/profile',method:'GET'},
     getPost: { url: '/post/:id', method: 'GET', params: true },
-    deletePost: { url: 'delete', method: 'DELETE', query: true },
+    deletePost: { url: 'delete/:id', method: 'DELETE', query: true },
     getPostById: { url: 'post', method: 'GET', query: true },
     newComment: { url: '/comment/new', method: 'POST' },
     getAllComments: { url: 'comments', method: 'GET', query: true },//query is id ka 
-   // deleteComment: { url: 'comment/delete', method: 'DELETE', query: true },
+    deleteComment: { url: 'comment/delete', method: 'DELETE', query: true },
     updatePost: { url: 'update', method: 'PUT', query: true }
 }

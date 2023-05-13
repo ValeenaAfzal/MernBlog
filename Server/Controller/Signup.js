@@ -4,6 +4,10 @@ import bcrypt from 'bcrypt';
 const Signup = async (req, res) => {
 
     try {
+        console.log("Here afster saved");
+         console.log(req.body.name);
+         console.log(req.body.pass);
+         console.log(req.body.username);
        // const adder = await bcrypt.genSalt(10);
         const hashpass= await bcrypt.hash(req.body.pass,8);//
         // this will receive complete signup object from react fie

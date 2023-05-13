@@ -43,7 +43,7 @@ const Textarea = styled(TextareaAutosize)`
 const initialPost = {
     title: '',
     description: '',
-   // picture: '',
+    picture: '',
     username: '',
     categories: '',
     createdDate: new Date(),
@@ -67,6 +67,9 @@ const CreatePost = () => {
                 const data = new FormData();// filter data from form object
                 data.append("name", file.name);
                 data.append("file", file);
+                
+                console.log(data.get("file"));
+                
                 //APi call to upload the image (config.js)
                 const response = await API.uploadFile(data);
                 post.picture = response.data;
@@ -75,7 +78,7 @@ const CreatePost = () => {
         getImage();
         post.categories = location.search?.split('=')[1] || 'All';//get category value //if search string exists ?category[0] and value=[1]
         post.username = account.username;//after getting from dataContext
-    }, [file])
+    }, [file]);
 
 
     const savePost = async () => {
